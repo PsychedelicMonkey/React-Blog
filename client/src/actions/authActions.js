@@ -1,9 +1,11 @@
 import {
+  AUTH_ERROR,
   LOGIN_ERROR,
   LOGIN_SUCCESS,
   LOGOUT_SUCCESS,
   REGISTER_ERROR,
   REGISTER_SUCCESS,
+  USER_LOADED,
 } from './types';
 import api from '../utils/api';
 
@@ -39,4 +41,18 @@ export const logoutUser = () => dispatch => {
   dispatch({
     type: LOGOUT_SUCCESS,
   });
+}
+
+export const loadUser = () => async dispatch => {
+  try {
+    const res = await api.get('/user/load');
+    dispatch({
+      type: USER_LOADED,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: AUTH_ERROR,
+    });
+  }
 }
