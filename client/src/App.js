@@ -8,6 +8,7 @@ import store from './store';
 import setAuthToken from './utils/setAuthToken';
 import { loadUser } from './actions/authActions';
 
+import AppNavbar from './AppNavbar';
 import Home from './components/Home';
 import Login from './components/auth/Login';
 import SignUp from './components/auth/SignUp';
@@ -26,6 +27,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Router>
+          <AppNavbar />
           <Route exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={SignUp} />
