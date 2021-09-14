@@ -10,7 +10,9 @@ import {
   Label,
   Row,
 } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { loginUser } from '../../actions/authActions';
 
 class Login extends Component {
   constructor(props) {
@@ -34,10 +36,17 @@ class Login extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    alert(JSON.stringify(this.state));
+    const { email, password } = this.state;
+    this.props.loginUser(email, password);
   }
 
   render() {
+    const { isAuthenticated } = this.props;
+
+    if (isAuthenticated) {
+      return <Redirect to="/" />
+    }
+
     return (
       <Row>
         <Col lg="4" md="8" className="m-auto">
@@ -83,4 +92,8 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { loginUser })(Login);
