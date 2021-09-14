@@ -1,3 +1,7 @@
+# React 
+build/
+coverage/
+
 # Logs
 logs
 *.log
