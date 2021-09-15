@@ -11,3 +11,7 @@
   width: 3rem;
   height: 3rem;
 }
+
+.ck-editor__editable_inline {
+  min-height: 400px;
+}

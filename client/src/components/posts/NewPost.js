@@ -11,6 +11,9 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addPost } from '../../actions/postActions';
 
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 class NewPost extends Component {
   constructor(props) {
     super(props);
@@ -75,12 +78,13 @@ class NewPost extends Component {
           </FormGroup>
 
           <FormGroup>
-            <Input
-              type="textarea"
-              id="content"
-              name="content"
-              value={this.state.content}
-              onChange={this.onChange}
+            <CKEditor
+              editor={ClassicEditor}
+              data={this.state.content}
+              onChange={(event, editor) => {
+                const data = editor.getData();
+                this.setState({ content: data });
+              }}
             />
           </FormGroup>
 
