@@ -7,9 +7,11 @@ import { Provider } from 'react-redux';
 import store from './store';
 import setAuthToken from './utils/setAuthToken';
 import { loadUser } from './actions/authActions';
+import PrivateRoute from './utils/PrivateRoute';
 
 import AppNavbar from './AppNavbar';
 import Home from './components/Home';
+import NewPost from './components/posts/NewPost';
 import Login from './components/auth/Login';
 import SignUp from './components/auth/SignUp';
 
@@ -31,6 +33,7 @@ class App extends Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={SignUp} />
+          <PrivateRoute exact path="/posts" component={NewPost} />
         </Router>
       </Provider>
     );

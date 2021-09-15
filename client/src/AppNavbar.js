@@ -49,6 +49,13 @@ class AppNavbar extends Component {
               <NavItem>
                 <NavLink tag={Link} to="/">Home</NavLink>
               </NavItem>
+              {isAuthenticated ? 
+                user.role === 'ADMIN' ? (
+                  <NavItem>
+                    <NavLink tag={Link} to="/posts">New Post</NavLink>
+                  </NavItem>
+                ) : null
+              : null}
             </Nav>
             <Nav className="ml-auto" navbar>
               { isAuthenticated ? (
