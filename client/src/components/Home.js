@@ -3,6 +3,8 @@ import { Container, Spinner } from 'reactstrap';
 import { connect } from 'react-redux';
 import { getPosts } from '../actions/postActions';
 
+import Loading from './Loading';
+
 class Home extends Component {
   componentDidMount() {
     this.props.getPosts();
@@ -10,6 +12,10 @@ class Home extends Component {
 
   render() {
     const { isLoading, posts } = this.props.post;
+
+    if (isLoading) {
+      return <Loading />;
+    }
 
     return (
       <Container>
@@ -21,9 +27,7 @@ class Home extends Component {
               <p>{post.user.firstName}</p>
             </div>
           ))
-        : isLoading ? (
-          <Spinner />
-        ) : null }
+        : null }
       </Container>
     );
   }

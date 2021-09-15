@@ -35,6 +35,7 @@ export default function(state = initialState, action) {
     case ADD_POST_ERROR:
       return {
         ...state,
+        isLoading: false,
       }
     default:
       return state;
