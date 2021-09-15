@@ -85,6 +85,9 @@ class NewPost extends Component {
                 const data = editor.getData();
                 this.setState({ content: data });
               }}
+              config={{
+                fillEmptyBlocks: false,
+              }}
             />
           </FormGroup>
 
