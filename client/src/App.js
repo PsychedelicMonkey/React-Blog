@@ -14,6 +14,7 @@ import Home from './components/Home';
 import NewPost from './components/posts/NewPost';
 import Login from './components/auth/Login';
 import SignUp from './components/auth/SignUp';
+import Post from './components/posts/Post';
 
 class App extends Component {
   componentDidMount() {
@@ -33,6 +34,7 @@ class App extends Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={SignUp} />
+          <Route exact path="/post/:id" component={Post} />
           <PrivateRoute exact path="/posts" component={NewPost} />
         </Router>
       </Provider>

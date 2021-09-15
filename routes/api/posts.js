@@ -17,6 +17,19 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const post = await Post.findById(id)
+      .populate('user')
+
+    res.json(post);
+  } catch (err) {
+    res.status(500).json({ msg: 'Server error' });
+  }
+});
+
 router.post('/', 
   body('title').notEmpty().withMessage('Please enter a title'),
   body('content').notEmpty().withMessage('Content cannot be empty'),

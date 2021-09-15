@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getPosts } from '../actions/postActions';
 
 import Loading from './Loading';
+import { Link } from 'react-router-dom';
 
 class Home extends Component {
   componentDidMount() {
@@ -25,6 +26,7 @@ class Home extends Component {
             <div>
               <h2>{post.title}</h2>
               <p>{post.user.firstName}</p>
+              <Link to={`/post/${post._id}`}>Read More</Link>
             </div>
           ))
         : null }

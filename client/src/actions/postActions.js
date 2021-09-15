@@ -1,6 +1,8 @@
 import {
   ADD_POST,
   ADD_POST_ERROR,
+  GET_POST,
+  GET_POST_ERROR,
   GET_POSTS,
   GET_POSTS_ERROR,
   POSTS_LOADING,
@@ -19,6 +21,22 @@ export const getPosts = () => async dispatch => {
   } catch (err) {
     dispatch({
       type: GET_POSTS_ERROR,
+    });
+  }
+}
+
+export const getPost = id => async dispatch => {
+  try {
+    dispatch({ type: POSTS_LOADING });
+
+    const res = await api.get(`/posts/${id}`);
+    dispatch({
+      type: GET_POST,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: GET_POST_ERROR,
     });
   }
 }
