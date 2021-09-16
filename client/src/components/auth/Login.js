@@ -84,6 +84,7 @@ class Login extends Component {
 
               <hr></hr>
               <Link to="/signup" className="btn btn-secondary btn-block">Sign Up</Link>
+              <a href="/auth/google" className="btn btn-danger btn-block">Log in with Google</a>
             </CardBody>
           </Card>
         </Col>

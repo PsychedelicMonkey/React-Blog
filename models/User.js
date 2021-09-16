@@ -20,6 +20,9 @@ const User = new Schema({
     type: String,
     select: false,
   },
+  googleId: {
+    type: String,
+  },
   image: {
     type: String,
   },
