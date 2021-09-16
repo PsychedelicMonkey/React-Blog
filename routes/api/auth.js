@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const gravatar = require('gravatar');
 const { body, validationResult } = require('express-validator');
 
 const User = require('../../models/User');
@@ -79,8 +80,9 @@ async (req, res) => {
     // Generate hash and salt
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
+    const image = gravatar.url(email, { d: 'identicon' }, true);
 
-    const user = await User.create({ firstName, lastName, email, password: hash });
+    const user = await User.create({ firstName, lastName, email, password: hash, image });
 
     const token = await jwt.sign({ _id: user.id }, process.env.JWT_SECRET, { expiresIn: 3600 });
 

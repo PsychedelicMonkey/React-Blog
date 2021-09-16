@@ -4,6 +4,7 @@ const auth = require('../../middleware/auth');
 const admin = require('../../middleware/admin');
 const { body, validationResult } = require('express-validator');
 
+const Comment = require('../../models/Comment');
 const Post = require('../../models/Post');
 
 router.get('/', async (req, res) => {
@@ -45,6 +46,23 @@ auth, admin, async (req, res) => {
     const post = await Post.create({ title, content, user: req.user });
     res.status(201).json(post);
   } catch (err) {
+    res.status(500).json({ msg: 'Server error' });
+  }
+});
+
+router.post('/comments/:id', auth, async (req, res) => {
+  const { id } = req.params;
+  const { content } = req.body;
+
+  try {
+    const post = await Post.findById(id);
+    const comment = await Comment.create({ content, user: req.user, });
+
+    post.comments.unshift(comment);
+    await post.save();
+
+    res.json(comment);
+  } catch (error) {
     res.status(500).json({ msg: 'Server error' });
   }
 });

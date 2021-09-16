@@ -10,14 +10,17 @@ const Post = new Schema({
     type: String,
     required: true,
   },
-  image: {
-    type: String,
-    required: true,
-  },
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User',
   },
+  comments: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Comment',
+      required: false,
+    },
+  ],
   createdAt: {
     type: Date,
     default: Date.now,
