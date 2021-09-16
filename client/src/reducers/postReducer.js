@@ -48,12 +48,16 @@ export default function(state = initialState, action) {
         post: { ...state.post, comments: [payload, ...state.post.comments] },
       }
     case GET_POST_ERROR:
+      return {
+        ...state,
+        post: null,
+        isLoading: false,
+      }
     case GET_POSTS_ERROR:
     case ADD_POST_ERROR:
     case ADD_COMMENT_ERROR:
       return {
         ...state,
-        post: null,
         isLoading: false,
       }
     default:

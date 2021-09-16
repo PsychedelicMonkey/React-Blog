@@ -39,7 +39,7 @@ class Post extends Component {
               <h3>Comments</h3>
               <CommentForm id={post._id} />
               { post.comments.length > 0 ? post.comments.map(comment => (
-                <Media className="mt-4 mb-5">
+                <Media className="mt-4 mb-5" key={comment._id}>
                   <Media left>
                     <img src={comment.user.image} alt="" className="img-comment mr-4" />
                   </Media>
