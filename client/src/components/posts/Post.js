@@ -6,8 +6,9 @@ import {
 import { connect } from 'react-redux';
 import { getPost } from '../../actions/postActions';
 import moment from 'moment';
-
 import parse from 'html-react-parser';
+
+import CommentForm from './CommentForm';
 
 class Post extends Component {
   componentDidMount() {
@@ -36,6 +37,7 @@ class Post extends Component {
             </div>
             <section className="comments">
               <h3>Comments</h3>
+              <CommentForm id={post._id} />
               { post.comments.length > 0 ? post.comments.map(comment => (
                 <Media className="mt-4 mb-5">
                   <Media left>

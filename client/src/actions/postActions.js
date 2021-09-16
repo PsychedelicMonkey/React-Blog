@@ -1,4 +1,6 @@
 import {
+  ADD_COMMENT,
+  ADD_COMMENT_ERROR,
   ADD_POST,
   ADD_POST_ERROR,
   GET_POST,
@@ -51,6 +53,20 @@ export const addPost = (title, content) => async dispatch => {
   } catch (err) {
     dispatch({
       type: ADD_POST_ERROR,
+    });
+  }
+}
+
+export const addComment = (id, content) => async dispatch => {
+  try {
+    const res = await api.post(`/posts/comments/${id}`, JSON.stringify({ content }));
+    dispatch({
+      type: ADD_COMMENT,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: ADD_COMMENT_ERROR,
     });
   }
 }

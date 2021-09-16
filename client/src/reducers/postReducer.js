@@ -1,4 +1,6 @@
 import {
+  ADD_COMMENT,
+  ADD_COMMENT_ERROR,
   ADD_POST,
   ADD_POST_ERROR,
   GET_POST,
@@ -40,9 +42,15 @@ export default function(state = initialState, action) {
         ...state,
         posts: [payload, ...state.posts],
       }
+    case ADD_COMMENT:
+      return {
+        ...state,
+        post: { ...state.post, comments: [payload, ...state.post.comments] },
+      }
     case GET_POST_ERROR:
     case GET_POSTS_ERROR:
     case ADD_POST_ERROR:
+    case ADD_COMMENT_ERROR:
       return {
         ...state,
         post: null,
