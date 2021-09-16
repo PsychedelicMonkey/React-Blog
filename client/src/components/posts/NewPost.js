@@ -87,6 +87,11 @@ class NewPost extends Component {
               }}
               config={{
                 fillEmptyBlocks: false,
+                contentsCss: [''],
+
+                ckfinder: {
+                  uploadUrl: '/upload',
+                }
               }}
             />
           </FormGroup>
