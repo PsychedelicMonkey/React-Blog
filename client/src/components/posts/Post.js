@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import {
   Container,
-  Col,
-  Row,
+  Media,
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import { getPost } from '../../actions/postActions';
@@ -21,7 +20,7 @@ class Post extends Component {
     const { post } = this.props.post;
 
     return (
-      <Container>
+      <Container className="mt-3 mb-5">
         { post ? (
           <article className="article">
             <header>
@@ -35,6 +34,22 @@ class Post extends Component {
             <div className="content">
               {parse(post.content)}
             </div>
+            <section className="comments">
+              <h3>Comments</h3>
+              { post.comments.length > 0 ? post.comments.map(comment => (
+                <Media className="mt-4 mb-5">
+                  <Media left>
+                    <img src={comment.user.image} alt="" className="img-comment mr-4" />
+                  </Media>
+                  <Media body>
+                    <Media heading>{comment.user.firstName} {comment.user.lastName}</Media>
+                    {comment.content}
+                  </Media>
+                </Media>
+              )) : (
+                <p>This post has no comments</p>
+              )}
+            </section>
           </article>
         ) : null }
       </Container>

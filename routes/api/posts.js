@@ -24,6 +24,14 @@ router.get('/:id', async (req, res) => {
   try {
     const post = await Post.findById(id)
       .populate('user')
+      .populate({
+        path: 'comments',
+        populate: {
+          path: 'user',
+          model: 'User',
+          select: '-role -createdAt',
+        },
+      });
 
     res.json(post);
   } catch (err) {

@@ -1,3 +1,7 @@
+img {
+  width: 100%;
+}
+
 .image img {
   width: 100%;
 }
@@ -20,6 +24,14 @@
   min-height: 400px;
 }
 
+.img-comment {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border: 1px solid #ccc;
+  padding: 2px;
+}
+
 .img-profile {
   width: 62px;
   height: 62px;
@@ -38,4 +50,9 @@
   .card-img-top {
     height: 220px;
   }
+}
+
+.comments {
+  border-top: 1px solid #ccc;
+  padding-top: 22px;
 }
