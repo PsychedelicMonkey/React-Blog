@@ -45,6 +45,7 @@ class Post extends Component {
                   </Media>
                   <Media body>
                     <Media heading>{comment.user.firstName} {comment.user.lastName}</Media>
+                    <p>{moment(comment.createdAt).fromNow()}</p>
                     {comment.content}
                   </Media>
                 </Media>

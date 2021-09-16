@@ -10,6 +10,7 @@ const Post = require('../../models/Post');
 router.get('/', async (req, res) => {
   try {
     const posts = await Post.find()
+      .select('-comments')
       .populate('user')
       .sort('-createdAt');
     res.json(posts);
