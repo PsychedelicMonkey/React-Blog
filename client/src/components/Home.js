@@ -1,7 +1,17 @@
 import React, { Component } from 'react';
-import { Container, Spinner } from 'reactstrap';
+import {
+  Card,
+  CardBody,
+  CardImg,
+  CardSubtitle,
+  CardTitle,
+  Container,
+  Col,
+  Row
+} from 'reactstrap';
 import { connect } from 'react-redux';
 import { getPosts } from '../actions/postActions';
+import moment from 'moment';
 
 import Loading from './Loading';
 import { Link } from 'react-router-dom';
@@ -21,15 +31,22 @@ class Home extends Component {
     return (
       <Container>
         <h1>Home</h1>
-        { posts ? 
-          posts.map(post => (
-            <div>
-              <h2>{post.title}</h2>
-              <p>{post.user.firstName}</p>
-              <Link to={`/post/${post._id}`}>Read More</Link>
-            </div>
-          ))
-        : null }
+        <Row>
+          { posts ? 
+            posts.map(post => (
+              <Col lg="10" className="mx-auto">
+                <Card className="mb-4">
+                  <CardImg top width="100%" height="440px" src={post.image} alt="Card image cap" style={{ objectFit: 'cover' }} />
+                  <CardBody>
+                    <CardTitle tag="h5">{post.title}</CardTitle>
+                    <CardSubtitle tag="h6" className="mb-2 text-muted">{moment(post.createdAt).format('MMM Do YYYY')}</CardSubtitle>
+                    <Link to={`/post/${post._id}`} className="btn btn-secondary mt-3">Read More</Link>
+                  </CardBody>
+                </Card>
+              </Col>
+            ))
+          : null }
+        </Row>
       </Container>
     );
   }

@@ -33,3 +33,9 @@
   border-top: 1px solid #ccc;
   padding-top: 22px;
 }
+
+@media (max-width: 500px) {
+  .card-img-top {
+    height: 220px;
+  }
+}
