@@ -56,3 +56,7 @@ img {
   border-top: 1px solid #ccc;
   padding-top: 22px;
 }
+
+.media:nth-child(even) {
+  background-color: #efefef;
+}

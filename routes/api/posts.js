@@ -59,7 +59,14 @@ auth, admin, async (req, res) => {
   }
 });
 
-router.post('/comments/:id', auth, async (req, res) => {
+router.post('/comments/:id', 
+  body('content').notEmpty().withMessage('Comment cannot be empty'),
+auth, async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   const { id } = req.params;
   const { content } = req.body;
 

@@ -36,10 +36,10 @@ class Post extends Component {
               {parse(post.content)}
             </div>
             <section className="comments">
-              <h3>Comments</h3>
+              <h3>{post.comments.length} Comments</h3>
               <CommentForm id={post._id} />
               { post.comments.length > 0 ? post.comments.map(comment => (
-                <Media className="mt-4 mb-5" key={comment._id}>
+                <Media className="pt-4 pb-5 pl-3" key={comment._id}>
                   <Media left>
                     <img src={comment.user.image} alt="" className="img-comment mr-4" />
                   </Media>
