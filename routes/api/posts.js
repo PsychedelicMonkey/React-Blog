@@ -91,6 +91,39 @@ auth, async (req, res) => {
   }
 });
 
+// Delete a comment
+router.delete('/comments/:id/:commentId', auth, async (req, res) => {
+  const { id, commentId } = req.params;
+
+  try {
+    const post = await Post.findById(id);
+    const comment = await Comment.findById(commentId);
+
+    // Check if comment exists
+    if (!comment) {
+      return res.status(404).json({ msg: 'Comment not found' });
+    }
+
+    // Check if the user owns the comment or is an admin user
+    if (!req.user.equals(comment.user) && req.user.role !== 'ADMIN') {
+      return res.status(403).json({ msg: 'Permission denied' });
+    }
+
+    // Delete comment
+    await comment.remove();
+
+    // Remove comment reference from post
+    post.comments = post.comments.filter(c => !c._id.equals(commentId));
+
+    // Save changes to post
+    await post.save();
+
+    res.json({ msg: 'Comment deleted' });
+  } catch (err) {
+    res.status(500).json({ msg: 'Server error' });
+  }
+});
+
 // Delete a post
 router.delete('/:id', auth, admin, async (req, res) => {
   const { id } = req.params;
