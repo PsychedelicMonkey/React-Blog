@@ -13,6 +13,7 @@ import AppNavbar from './AppNavbar';
 import Home from './components/Home';
 import NewPost from './components/posts/NewPost';
 import Post from './components/posts/Post';
+import Posts from './components/admin/Posts';
 import Login from './components/auth/Login';
 import SignUp from './components/auth/SignUp';
 import Users from './components/admin/Users';
@@ -37,7 +38,8 @@ class App extends Component {
           <Route exact path="/signup" component={SignUp} />
           <Route exact path="/post/:id" component={Post} />
           <PrivateRoute exact path="/posts" component={NewPost} />
-          <PrivateRoute exact path="/users" component={Users} />
+          <PrivateRoute exact path="/admin/users" component={Users} />
+          <PrivateRoute exact path="/admin/posts" component={Posts} />
         </Router>
       </Provider>
     );

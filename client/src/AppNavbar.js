@@ -64,7 +64,8 @@ class AppNavbar extends Component {
                   <DropdownMenu right>
                     { user.role === 'ADMIN' ? (
                       <Fragment>
-                        <DropdownItem tag={Link} to="/users">Users</DropdownItem>
+                        <DropdownItem tag={Link} to="/admin/posts">Posts</DropdownItem>
+                        <DropdownItem tag={Link} to="/admin/users">Users</DropdownItem>
                         <DropdownItem divider />
                       </Fragment>
                     ) : null }
