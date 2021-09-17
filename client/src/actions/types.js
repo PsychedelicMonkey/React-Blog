@@ -10,6 +10,8 @@ export const USER_LOADED = 'USER_LOADED';
 // Posts
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const ADD_COMMENT_ERROR = 'ADD_COMMENT_ERROR';
+export const DELETE_COMMENT = 'DELETE_COMMENT';
+export const DELETE_COMMENT_ERROR = 'DELETE_COMMENT_ERROR';
 export const ADD_POST = 'ADD_POST';
 export const ADD_POST_ERROR = 'ADD_POST_ERROR';
 export const GET_POST = 'GET_POST';

@@ -9,6 +9,7 @@ import moment from 'moment';
 import parse from 'html-react-parser';
 
 import CommentForm from './CommentForm';
+import DeleteComment from './DeleteComment';
 
 class Post extends Component {
   componentDidMount() {
@@ -19,6 +20,7 @@ class Post extends Component {
 
   render() {
     const { post } = this.props.post;
+    const { isAuthenticated, user } = this.props.auth;
 
     return (
       <Container className="mt-3 mb-5">
@@ -39,7 +41,7 @@ class Post extends Component {
               <h3>{post.comments.length} Comments</h3>
               <CommentForm id={post._id} />
               { post.comments.length > 0 ? post.comments.map(comment => (
-                <Media className="pt-4 pb-5 pl-3" key={comment._id}>
+                <Media className="pt-4 pb-5 px-3" key={comment._id}>
                   <Media left>
                     <img src={comment.user.image} alt="" className="img-comment mr-4" />
                   </Media>
@@ -48,6 +50,11 @@ class Post extends Component {
                     <p>{moment(comment.createdAt).fromNow()}</p>
                     {comment.content}
                   </Media>
+                  { isAuthenticated ?
+                    user._id === comment.user._id || user.role === 'ADMIN' ? (
+                      <DeleteComment postId={post._id} commentId={comment._id} />
+                    ) : null
+                  : null }
                 </Media>
               )) : (
                 <p>This post has no comments</p>
@@ -61,6 +68,7 @@ class Post extends Component {
 }
 
 const mapStateToProps = state => ({
+  auth: state.auth,
   post: state.post,
 });
 

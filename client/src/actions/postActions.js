@@ -1,6 +1,8 @@
 import {
   ADD_COMMENT,
   ADD_COMMENT_ERROR,
+  DELETE_COMMENT,
+  DELETE_COMMENT_ERROR,
   ADD_POST,
   ADD_POST_ERROR,
   GET_POST,
@@ -83,6 +85,20 @@ export const deletePost = id => async dispatch => {
   } catch (err) {
     dispatch({
       type: DELETE_POST_ERROR,
+    });
+  }
+}
+
+export const deleteComment = (postId, commentId) => async dispatch => {
+  try {
+    const res = await api.delete(`/posts/comments/${postId}/${commentId}`);
+    dispatch({
+      type: DELETE_COMMENT,
+      payload: commentId,
+    });
+  } catch (err) {
+    dispatch({
+      type: DELETE_COMMENT_ERROR,
     });
   }
 }
