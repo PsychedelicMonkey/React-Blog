@@ -41,6 +41,14 @@ img {
   padding: 2px;
 }
 
+.img-table {
+  width: 82px;
+  height: 82px;
+  object-fit: cover;
+  border: 1px solid #ccc;
+  padding: 2px;
+}
+
 .content {
   border-top: 1px solid #ccc;
   padding-top: 22px;

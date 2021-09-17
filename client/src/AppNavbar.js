@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import {
   Container,
   Collapse,
@@ -62,9 +62,12 @@ class AppNavbar extends Component {
                 <UncontrolledDropdown nav inNavbar>
                   <DropdownToggle nav caret>{user.firstName} {user.lastName}</DropdownToggle>
                   <DropdownMenu right>
-                    <DropdownItem>Option 1</DropdownItem>
-                    <DropdownItem>Option 2</DropdownItem>
-                    <DropdownItem divider />
+                    { user.role === 'ADMIN' ? (
+                      <Fragment>
+                        <DropdownItem tag={Link} to="/users">Users</DropdownItem>
+                        <DropdownItem divider />
+                      </Fragment>
+                    ) : null }
                     <Logout />
                   </DropdownMenu>
                 </UncontrolledDropdown>
