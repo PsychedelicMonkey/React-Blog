@@ -7,6 +7,8 @@ import {
   GET_POST_ERROR,
   GET_POSTS,
   GET_POSTS_ERROR,
+  DELETE_POST,
+  DELETE_POST_ERROR,
   POSTS_LOADING,
 } from '../actions/types';
 
@@ -53,9 +55,15 @@ export default function(state = initialState, action) {
         post: null,
         isLoading: false,
       }
+    case DELETE_POST:
+      return {
+        ...state,
+        posts: state.posts.filter(p => p._id !== payload),
+      }
     case GET_POSTS_ERROR:
     case ADD_POST_ERROR:
     case ADD_COMMENT_ERROR:
+    case DELETE_POST_ERROR:
       return {
         ...state,
         isLoading: false,

@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { Container, Table } from 'reactstrap';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getPosts } from '../../actions/postActions';
+import { getPosts } from '../../../actions/postActions';
 import moment from 'moment';
 
-import Loading from '../Loading';
+import Loading from '../../Loading';
+import DeletePost from './DeletePost';
 
 class Posts extends Component {
   componentDidMount() {
@@ -43,7 +44,7 @@ class Posts extends Component {
                   <td>{moment(post.createdAt).format('MMMM Do YYYY HH:mm:ss A')}</td>
                   <td>
                     <Link to="/" className="btn btn-warning mr-2">Edit</Link>
-                    <Link to="/" className="btn btn-danger">Delete</Link>
+                    <DeletePost id={post._id} />
                   </td>
                 </tr>
               )) }

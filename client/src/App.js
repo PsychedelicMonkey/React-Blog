@@ -13,7 +13,7 @@ import AppNavbar from './AppNavbar';
 import Home from './components/Home';
 import NewPost from './components/posts/NewPost';
 import Post from './components/posts/Post';
-import Posts from './components/admin/Posts';
+import Posts from './components/admin/posts/Posts';
 import Login from './components/auth/Login';
 import SignUp from './components/auth/SignUp';
 import Users from './components/admin/Users';

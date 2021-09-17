@@ -7,6 +7,8 @@ import {
   GET_POST_ERROR,
   GET_POSTS,
   GET_POSTS_ERROR,
+  DELETE_POST,
+  DELETE_POST_ERROR,
   POSTS_LOADING,
 } from './types';
 import api from '../utils/api';
@@ -67,6 +69,20 @@ export const addComment = (id, content) => async dispatch => {
   } catch (err) {
     dispatch({
       type: ADD_COMMENT_ERROR,
+    });
+  }
+}
+
+export const deletePost = id => async dispatch => {
+  try {
+    const res = await api.delete(`/posts/${id}`);
+    dispatch({
+      type: DELETE_POST,
+      payload: id,
+    });
+  } catch (err) {
+    dispatch({
+      type: DELETE_POST_ERROR,
     });
   }
 }

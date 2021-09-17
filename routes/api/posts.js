@@ -7,6 +7,7 @@ const { body, validationResult } = require('express-validator');
 const Comment = require('../../models/Comment');
 const Post = require('../../models/Post');
 
+// Get all posts
 router.get('/', async (req, res) => {
   try {
     const posts = await Post.find()
@@ -19,6 +20,7 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Get a post by ID
 router.get('/:id', async (req, res) => {
   const { id } = req.params;
 
@@ -34,12 +36,17 @@ router.get('/:id', async (req, res) => {
         },
       });
 
+      if (!post) {
+        return res.status(404).json({ msg: 'Post not found' });
+      }
+
     res.json(post);
   } catch (err) {
     res.status(500).json({ msg: 'Server error' });
   }
 });
 
+// Add a new post
 router.post('/', 
   body('title').notEmpty().withMessage('Please enter a title'),
   body('content').notEmpty().withMessage('Content cannot be empty'),
@@ -59,6 +66,7 @@ auth, admin, async (req, res) => {
   }
 });
 
+// Add a comment
 router.post('/comments/:id', 
   body('content').notEmpty().withMessage('Comment cannot be empty'),
 auth, async (req, res) => {
@@ -79,6 +87,30 @@ auth, async (req, res) => {
 
     res.json(comment);
   } catch (error) {
+    res.status(500).json({ msg: 'Server error' });
+  }
+});
+
+// Delete a post
+router.delete('/:id', auth, admin, async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const post = await Post.findById(id);
+    
+    // Check if post exists
+    if (!post) {
+      return res.status(404).json({ msg: 'Post not found' });
+    }
+
+    // Delete all comments from post
+    await Comment.deleteMany({ _id: { $in: post.comments } });
+
+    // Delete post
+    await post.remove();
+
+    res.json({ msg: 'Post removed' });
+  } catch (err) {
     res.status(500).json({ msg: 'Server error' });
   }
 });
